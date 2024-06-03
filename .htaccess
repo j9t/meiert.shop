@@ -35,18 +35,18 @@ Header always edit Set-Cookie (.*) "$1; SameSite=Lax; Secure"
 Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" env=HTTPS
 Header always set X-Content-Type-Options nosniff
 
-# <FilesMatch "\.(html|php|xml)$">
-# 	# Header always set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; frame-ancestors 'self'"
-# 	# Header always set Feature-Policy "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'"
-# 	Header always set Referrer-Policy "strict-origin-when-cross-origin"
-# 	Header always set X-XSS-Protection "1; mode=block"
-# </FilesMatch>
+<FilesMatch "\.(html|php|xml)$">
+	# Header always set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; frame-ancestors 'self'"
+	# Header always set Feature-Policy "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'"
+	Header always set Referrer-Policy "strict-origin-when-cross-origin"
+	Header always set X-XSS-Protection "1; mode=block"
+</FilesMatch>
 
 # Course Calibration
-RewriteEngine On
-RewriteCond %{HTTPS} !=on [OR]
-RewriteCond %{HTTP_HOST} !^meiert\.shop$ [NC]
-RewriteRule ^ https://meiert.shop%{REQUEST_URI} [R=301,L]
+# RewriteEngine On
+# RewriteCond %{HTTPS} !=on [OR]
+# RewriteCond %{HTTP_HOST} !^meiert\.shop$ [NC]
+# RewriteRule ^ https://meiert.shop%{REQUEST_URI} [R=301,L]
 
 # Course Alterations: P3
 Redirect 302 /test https://meiert.com/en/
