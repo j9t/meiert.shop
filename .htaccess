@@ -36,6 +36,7 @@ Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains
 Header always set X-Content-Type-Options nosniff
 
 <FilesMatch "\.(html|php|xml)$">
+	# Header always set Clear-Site-Data: "*"
 	# Header always set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; frame-ancestors 'self'"
 	# Header always set Feature-Policy "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'"
 	Header always set Referrer-Policy "strict-origin-when-cross-origin"
