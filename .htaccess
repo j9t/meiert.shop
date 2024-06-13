@@ -36,12 +36,17 @@ Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains
 Header always set X-Content-Type-Options nosniff
 
 <FilesMatch "\.(html|php|xml)$">
-	# Header always set Clear-Site-Data: "*"
+	Header always set Clear-Site-Data: "*"
 	# Header always set Content-Security-Policy "upgrade-insecure-requests; default-src 'self'; frame-ancestors 'self'"
 	# Header always set Feature-Policy "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'"
 	Header always set Referrer-Policy "strict-origin-when-cross-origin"
 	Header always set X-XSS-Protection "1; mode=block"
 </FilesMatch>
+
+# Startup Routine: CloudFront
+SetEnvIf REQUEST_URI ^(.*?)(index\.(html|php))?$ NOINDEX=$1
+Header set Link "<https://meiert.shopPATH>; rel=canonical"
+Header edit* Link PATH %{NOINDEX}e ENV=NOINDEX
 
 # Course Calibration
 # RewriteEngine On
@@ -51,6 +56,7 @@ Header always set X-Content-Type-Options nosniff
 
 # Course Alterations: P3
 Redirect 302 /test https://meiert.com/en/
+Redirect 302 /test2 https://meiert.com/en/#test2
 
 # Emergency
 SetEnvIf Host ^ suppress-error-charset
